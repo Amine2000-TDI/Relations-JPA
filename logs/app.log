@@ -1,0 +1,86 @@
+2025-03-07 18:33:39,147 DEBUG o.h.SQL [main] 
+    
+    create table Adresse (
+       id bigint not null,
+        codePostale varchar(255),
+        rue varchar(255),
+        ville varchar(255),
+        primary key (id)
+    ) engine=InnoDB
+2025-03-07 18:33:39,289 DEBUG o.h.SQL [main] 
+    
+    create table hibernate_sequence (
+       next_val bigint
+    ) engine=InnoDB
+2025-03-07 18:33:39,338 DEBUG o.h.SQL [main] 
+    
+    insert into hibernate_sequence values ( 1 )
+2025-03-07 18:33:39,356 DEBUG o.h.SQL [main] 
+    
+    create table Personne (
+       id bigint not null,
+        nom varchar(255),
+        prenom varchar(255),
+        adresse bigint,
+        primary key (id)
+    ) engine=InnoDB
+2025-03-07 18:33:39,412 DEBUG o.h.SQL [main] 
+    
+    create table Projet (
+       id bigint not null,
+        description varchar(255),
+        titre varchar(255),
+        primary key (id)
+    ) engine=InnoDB
+2025-03-07 18:33:39,567 DEBUG o.h.SQL [main] 
+    
+    alter table Personne 
+       add constraint FKithahf2c0aeiyk04wb97063ju 
+       foreign key (adresse) 
+       references Adresse (id)
+2025-03-07 23:34:42,305 DEBUG o.h.SQL [main] 
+    
+    create table Categorie (
+       id bigint not null,
+        description varchar(255),
+        labelle varchar(255),
+        primary key (id)
+    ) engine=InnoDB
+2025-03-07 23:34:42,460 DEBUG o.h.SQL [main] 
+    
+    alter table Personne 
+       add column cle_etrangere_adresse bigint
+2025-03-07 23:34:42,593 DEBUG o.h.SQL [main] 
+    
+    create table Personne_Projet (
+       personnes_id bigint not null,
+        projets_id bigint not null
+    ) engine=InnoDB
+2025-03-07 23:34:42,668 DEBUG o.h.SQL [main] 
+    
+    alter table Projet 
+       add column cle_etrangere_categorie bigint
+2025-03-07 23:34:42,837 DEBUG o.h.SQL [main] 
+    
+    alter table Personne 
+       add constraint FKh0vd2c4wf1ypdv4j3orw3nwyj 
+       foreign key (cle_etrangere_adresse) 
+       references Adresse (id)
+2025-03-07 23:34:43,339 DEBUG o.h.SQL [main] 
+    
+    alter table Personne_Projet 
+       add constraint FKo247xjpi18dfpdal8tt2vf0oq 
+       foreign key (projets_id) 
+       references Projet (id)
+2025-03-07 23:34:43,602 DEBUG o.h.SQL [main] 
+    
+    alter table Personne_Projet 
+       add constraint FKib87mfrmrwpj1amkn5lifxu6 
+       foreign key (personnes_id) 
+       references Personne (id)
+2025-03-07 23:34:43,847 DEBUG o.h.SQL [main] 
+    
+    alter table Projet 
+       add constraint FKnow4sbt049svlgsgjslur2kcd 
+       foreign key (cle_etrangere_categorie) 
+       references Categorie (id)
