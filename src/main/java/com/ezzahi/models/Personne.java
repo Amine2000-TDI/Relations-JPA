@@ -1,15 +1,15 @@
 package com.ezzahi.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data @AllArgsConstructor @NoArgsConstructor @Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Personne {
     @Id
     @GeneratedValue
@@ -18,11 +18,10 @@ public class Personne {
     private String prenom;
 
     @OneToOne(cascade = CascadeType.ALL)
-    //le nom de la clé étrangère
     @JoinColumn(name="cle_etrangere_adresse")
     private Adresse adresse;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY )
     private List<Projet> projets;
 
     @Override

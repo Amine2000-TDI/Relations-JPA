@@ -1,4 +1,42 @@
-2025-03-07 18:33:39,147 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:21,235 DEBUG o.h.SQL [main] 
+    
+    alter table Personne 
+       drop 
+       foreign key FKh0vd2c4wf1ypdv4j3orw3nwyj
+2025-03-13 01:58:21,276 DEBUG o.h.SQL [main] 
+    
+    alter table Personne_Projet 
+       drop 
+       foreign key FKo247xjpi18dfpdal8tt2vf0oq
+2025-03-13 01:58:21,289 DEBUG o.h.SQL [main] 
+    
+    alter table Personne_Projet 
+       drop 
+       foreign key FKib87mfrmrwpj1amkn5lifxu6
+2025-03-13 01:58:21,320 DEBUG o.h.SQL [main] 
+    
+    alter table Projet 
+       drop 
+       foreign key FKnow4sbt049svlgsgjslur2kcd
+2025-03-13 01:58:21,346 DEBUG o.h.SQL [main] 
+    
+    drop table if exists Adresse
+2025-03-13 01:58:21,377 DEBUG o.h.SQL [main] 
+    
+    drop table if exists Categorie
+2025-03-13 01:58:21,416 DEBUG o.h.SQL [main] 
+    
+    drop table if exists hibernate_sequence
+2025-03-13 01:58:21,444 DEBUG o.h.SQL [main] 
+    
+    drop table if exists Personne
+2025-03-13 01:58:21,488 DEBUG o.h.SQL [main] 
+    
+    drop table if exists Personne_Projet
+2025-03-13 01:58:21,519 DEBUG o.h.SQL [main] 
+    
+    drop table if exists Projet
+2025-03-13 01:58:21,576 DEBUG o.h.SQL [main] 
     
     create table Adresse (
        id bigint not null,
@@ -7,38 +45,7 @@
         ville varchar(255),
         primary key (id)
     ) engine=InnoDB
-2025-03-07 18:33:39,289 DEBUG o.h.SQL [main] 
-    
-    create table hibernate_sequence (
-       next_val bigint
-    ) engine=InnoDB
-2025-03-07 18:33:39,338 DEBUG o.h.SQL [main] 
-    
-    insert into hibernate_sequence values ( 1 )
-2025-03-07 18:33:39,356 DEBUG o.h.SQL [main] 
-    
-    create table Personne (
-       id bigint not null,
-        nom varchar(255),
-        prenom varchar(255),
-        adresse bigint,
-        primary key (id)
-    ) engine=InnoDB
-2025-03-07 18:33:39,412 DEBUG o.h.SQL [main] 
-    
-    create table Projet (
-       id bigint not null,
-        description varchar(255),
-        titre varchar(255),
-        primary key (id)
-    ) engine=InnoDB
-2025-03-07 18:33:39,567 DEBUG o.h.SQL [main] 
-    
-    alter table Personne 
-       add constraint FKithahf2c0aeiyk04wb97063ju 
-       foreign key (adresse) 
-       references Adresse (id)
-2025-03-07 23:34:42,305 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:21,622 DEBUG o.h.SQL [main] 
     
     create table Categorie (
        id bigint not null,
@@ -46,41 +53,1194 @@
         labelle varchar(255),
         primary key (id)
     ) engine=InnoDB
-2025-03-07 23:34:42,460 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:21,666 DEBUG o.h.SQL [main] 
     
-    alter table Personne 
-       add column cle_etrangere_adresse bigint
-2025-03-07 23:34:42,593 DEBUG o.h.SQL [main] 
+    create table hibernate_sequence (
+       next_val bigint
+    ) engine=InnoDB
+2025-03-13 01:58:21,722 DEBUG o.h.SQL [main] 
+    
+    insert into hibernate_sequence values ( 1 )
+2025-03-13 01:58:21,732 DEBUG o.h.SQL [main] 
+    
+    create table Personne (
+       id bigint not null,
+        nom varchar(255),
+        prenom varchar(255),
+        cle_etrangere_adresse bigint,
+        primary key (id)
+    ) engine=InnoDB
+2025-03-13 01:58:21,786 DEBUG o.h.SQL [main] 
     
     create table Personne_Projet (
        personnes_id bigint not null,
         projets_id bigint not null
     ) engine=InnoDB
-2025-03-07 23:34:42,668 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:21,819 DEBUG o.h.SQL [main] 
     
-    alter table Projet 
-       add column cle_etrangere_categorie bigint
-2025-03-07 23:34:42,837 DEBUG o.h.SQL [main] 
+    create table Projet (
+       id bigint not null,
+        description varchar(255),
+        titre varchar(255),
+        cle_etrangere_categorie bigint,
+        primary key (id)
+    ) engine=InnoDB
+2025-03-13 01:58:21,907 DEBUG o.h.SQL [main] 
     
     alter table Personne 
        add constraint FKh0vd2c4wf1ypdv4j3orw3nwyj 
        foreign key (cle_etrangere_adresse) 
        references Adresse (id)
-2025-03-07 23:34:43,339 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:22,185 DEBUG o.h.SQL [main] 
     
     alter table Personne_Projet 
        add constraint FKo247xjpi18dfpdal8tt2vf0oq 
        foreign key (projets_id) 
        references Projet (id)
-2025-03-07 23:34:43,602 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:22,339 DEBUG o.h.SQL [main] 
     
     alter table Personne_Projet 
        add constraint FKib87mfrmrwpj1amkn5lifxu6 
        foreign key (personnes_id) 
        references Personne (id)
-2025-03-07 23:34:43,847 DEBUG o.h.SQL [main] 
+2025-03-13 01:58:22,518 DEBUG o.h.SQL [main] 
     
     alter table Projet 
        add constraint FKnow4sbt049svlgsgjslur2kcd 
        foreign key (cle_etrangere_categorie) 
        references Categorie (id)
+2025-03-13 01:58:22,773 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:22,809 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:22,839 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Adresse
+        (codePostale, rue, ville, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:22,839 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [VARCHAR] - [1]
+2025-03-13 01:58:22,839 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [rue 1]
+2025-03-13 01:58:22,839 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [Ville 1]
+2025-03-13 01:58:22,839 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [1]
+2025-03-13 01:58:22,866 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:22,868 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:22,876 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Adresse
+        (codePostale, rue, ville, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:22,876 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [VARCHAR] - [2]
+2025-03-13 01:58:22,877 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [rue 2]
+2025-03-13 01:58:22,877 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [Ville 2]
+2025-03-13 01:58:22,877 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [2]
+2025-03-13 01:58:22,891 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:22,891 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:22,922 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Categorie
+        (description, labelle, id) 
+    values
+        (?, ?, ?)
+2025-03-13 01:58:22,922 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [VARCHAR] - [description 1]
+2025-03-13 01:58:22,923 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [categorie 1]
+2025-03-13 01:58:22,923 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [BIGINT] - [3]
+2025-03-13 01:58:22,932 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:22,933 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:22,942 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Categorie
+        (description, labelle, id) 
+    values
+        (?, ?, ?)
+2025-03-13 01:58:22,942 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [VARCHAR] - [description 2]
+2025-03-13 01:58:22,943 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [categorie 2]
+2025-03-13 01:58:22,943 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [BIGINT] - [4]
+2025-03-13 01:58:22,992 DEBUG o.h.SQL [main] 
+    select
+        adresse0_.id as id1_0_0_,
+        adresse0_.codePostale as codepost2_0_0_,
+        adresse0_.rue as rue3_0_0_,
+        adresse0_.ville as ville4_0_0_ 
+    from
+        Adresse adresse0_ 
+    where
+        adresse0_.id=?
+2025-03-13 01:58:22,995 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,008 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.cle_etrangere_adresse=?
+2025-03-13 01:58:23,009 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,014 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,015 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,026 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne
+        (cle_etrangere_adresse, nom, prenom, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,026 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,026 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [amine]
+2025-03-13 01:58:23,026 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [ezzahi]
+2025-03-13 01:58:23,027 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [5]
+2025-03-13 01:58:23,035 DEBUG o.h.SQL [main] 
+    select
+        adresse0_.id as id1_0_0_,
+        adresse0_.codePostale as codepost2_0_0_,
+        adresse0_.rue as rue3_0_0_,
+        adresse0_.ville as ville4_0_0_ 
+    from
+        Adresse adresse0_ 
+    where
+        adresse0_.id=?
+2025-03-13 01:58:23,035 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,035 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.cle_etrangere_adresse=?
+2025-03-13 01:58:23,035 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,039 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,039 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,039 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne
+        (cle_etrangere_adresse, nom, prenom, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,049 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,049 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [rahou]
+2025-03-13 01:58:23,049 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [ali]
+2025-03-13 01:58:23,049 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [6]
+2025-03-13 01:58:23,059 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_1_,
+        categorie0_.description as descript2_1_1_,
+        categorie0_.labelle as labelle3_1_1_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_3_,
+        projets1_.id as id1_4_3_,
+        projets1_.id as id1_4_0_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets1_.description as descript2_4_0_,
+        projets1_.titre as titre3_4_0_ 
+    from
+        Categorie categorie0_ 
+    left outer join
+        Projet projets1_ 
+            on categorie0_.id=projets1_.cle_etrangere_categorie 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,059 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,070 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,071 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,079 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_0_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_0_,
+        personne0_.nom as nom2_2_0_,
+        personne0_.prenom as prenom3_2_0_,
+        adresse1_.id as id1_0_1_,
+        adresse1_.codePostale as codepost2_0_1_,
+        adresse1_.rue as rue3_0_1_,
+        adresse1_.ville as ville4_0_1_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,079 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,087 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Projet
+        (cle_etrangere_categorie, description, titre, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,087 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,088 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [description projet 1]
+2025-03-13 01:58:23,088 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [projet 1]
+2025-03-13 01:58:23,088 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [7]
+2025-03-13 01:58:23,103 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_1_,
+        categorie0_.description as descript2_1_1_,
+        categorie0_.labelle as labelle3_1_1_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_3_,
+        projets1_.id as id1_4_3_,
+        projets1_.id as id1_4_0_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets1_.description as descript2_4_0_,
+        projets1_.titre as titre3_4_0_ 
+    from
+        Categorie categorie0_ 
+    left outer join
+        Projet projets1_ 
+            on categorie0_.id=projets1_.cle_etrangere_categorie 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,104 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,106 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,107 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,110 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_0_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_0_,
+        personne0_.nom as nom2_2_0_,
+        personne0_.prenom as prenom3_2_0_,
+        adresse1_.id as id1_0_1_,
+        adresse1_.codePostale as codepost2_0_1_,
+        adresse1_.rue as rue3_0_1_,
+        adresse1_.ville as ville4_0_1_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,110 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,110 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Projet
+        (cle_etrangere_categorie, description, titre, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,110 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,110 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [description projet 2]
+2025-03-13 01:58:23,110 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [projet 2]
+2025-03-13 01:58:23,110 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [8]
+2025-03-13 01:58:23,119 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_1_,
+        categorie0_.description as descript2_1_1_,
+        categorie0_.labelle as labelle3_1_1_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_3_,
+        projets1_.id as id1_4_3_,
+        projets1_.id as id1_4_0_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets1_.description as descript2_4_0_,
+        projets1_.titre as titre3_4_0_ 
+    from
+        Categorie categorie0_ 
+    left outer join
+        Projet projets1_ 
+            on categorie0_.id=projets1_.cle_etrangere_categorie 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,119 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,130 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,132 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,140 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_0_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_0_,
+        personne0_.nom as nom2_2_0_,
+        personne0_.prenom as prenom3_2_0_,
+        adresse1_.id as id1_0_1_,
+        adresse1_.codePostale as codepost2_0_1_,
+        adresse1_.rue as rue3_0_1_,
+        adresse1_.ville as ville4_0_1_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,141 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,142 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Projet
+        (cle_etrangere_categorie, description, titre, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,143 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,143 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [description projet 3]
+2025-03-13 01:58:23,143 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [projet 3]
+2025-03-13 01:58:23,143 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [9]
+2025-03-13 01:58:23,153 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_1_,
+        categorie0_.description as descript2_1_1_,
+        categorie0_.labelle as labelle3_1_1_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_3_,
+        projets1_.id as id1_4_3_,
+        projets1_.id as id1_4_0_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets1_.description as descript2_4_0_,
+        projets1_.titre as titre3_4_0_ 
+    from
+        Categorie categorie0_ 
+    left outer join
+        Projet projets1_ 
+            on categorie0_.id=projets1_.cle_etrangere_categorie 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,154 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]
+2025-03-13 01:58:23,156 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,157 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,164 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Projet
+        (cle_etrangere_categorie, description, titre, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,165 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]
+2025-03-13 01:58:23,165 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [description projet 4]
+2025-03-13 01:58:23,165 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [projet 4]
+2025-03-13 01:58:23,165 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [10]
+2025-03-13 01:58:23,173 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_1_,
+        categorie0_.description as descript2_1_1_,
+        categorie0_.labelle as labelle3_1_1_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_3_,
+        projets1_.id as id1_4_3_,
+        projets1_.id as id1_4_0_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets1_.description as descript2_4_0_,
+        projets1_.titre as titre3_4_0_ 
+    from
+        Categorie categorie0_ 
+    left outer join
+        Projet projets1_ 
+            on categorie0_.id=projets1_.cle_etrangere_categorie 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,174 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]
+2025-03-13 01:58:23,176 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,177 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,186 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Projet
+        (cle_etrangere_categorie, description, titre, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,187 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]
+2025-03-13 01:58:23,187 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [description projet 5]
+2025-03-13 01:58:23,187 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [projet 5]
+2025-03-13 01:58:23,187 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [11]
+2025-03-13 01:58:23,195 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_1_,
+        categorie0_.description as descript2_1_1_,
+        categorie0_.labelle as labelle3_1_1_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_3_,
+        projets1_.id as id1_4_3_,
+        projets1_.id as id1_4_0_,
+        projets1_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets1_.description as descript2_4_0_,
+        projets1_.titre as titre3_4_0_ 
+    from
+        Categorie categorie0_ 
+    left outer join
+        Projet projets1_ 
+            on categorie0_.id=projets1_.cle_etrangere_categorie 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,196 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]
+2025-03-13 01:58:23,198 DEBUG o.h.SQL [main] 
+    select
+        next_val as id_val 
+    from
+        hibernate_sequence for update
+            
+2025-03-13 01:58:23,199 DEBUG o.h.SQL [main] 
+    update
+        hibernate_sequence 
+    set
+        next_val= ? 
+    where
+        next_val=?
+2025-03-13 01:58:23,207 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Projet
+        (cle_etrangere_categorie, description, titre, id) 
+    values
+        (?, ?, ?, ?)
+2025-03-13 01:58:23,207 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]
+2025-03-13 01:58:23,208 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [description projet 6]
+2025-03-13 01:58:23,208 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [projet 6]
+2025-03-13 01:58:23,208 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [12]
+2025-03-13 01:58:23,211 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,219 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,219 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.cle_etrangere_adresse=?
+2025-03-13 01:58:23,219 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,219 DEBUG o.h.SQL [main] 
+    select
+        projets0_.personnes_id as personne1_3_0_,
+        projets0_.projets_id as projets_2_3_0_,
+        projet1_.id as id1_4_1_,
+        projet1_.cle_etrangere_categorie as cle_etra4_4_1_,
+        projet1_.description as descript2_4_1_,
+        projet1_.titre as titre3_4_1_,
+        categorie2_.id as id1_1_2_,
+        categorie2_.description as descript2_1_2_,
+        categorie2_.labelle as labelle3_1_2_ 
+    from
+        Personne_Projet projets0_ 
+    inner join
+        Projet projet1_ 
+            on projets0_.projets_id=projet1_.id 
+    left outer join
+        Categorie categorie2_ 
+            on projet1_.cle_etrangere_categorie=categorie2_.id 
+    where
+        projets0_.personnes_id=?
+2025-03-13 01:58:23,219 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,233 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,233 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [7]
+2025-03-13 01:58:23,239 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,239 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [8]
+2025-03-13 01:58:23,249 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,250 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [9]
+2025-03-13 01:58:23,260 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne_Projet
+        (personnes_id, projets_id) 
+    values
+        (?, ?)
+2025-03-13 01:58:23,262 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,263 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [BIGINT] - [7]
+2025-03-13 01:58:23,267 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne_Projet
+        (personnes_id, projets_id) 
+    values
+        (?, ?)
+2025-03-13 01:58:23,268 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,268 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [BIGINT] - [8]
+2025-03-13 01:58:23,270 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne_Projet
+        (personnes_id, projets_id) 
+    values
+        (?, ?)
+2025-03-13 01:58:23,270 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,271 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [BIGINT] - [9]
+2025-03-13 01:58:23,286 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,286 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,290 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.cle_etrangere_adresse=?
+2025-03-13 01:58:23,291 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,294 DEBUG o.h.SQL [main] 
+    select
+        projets0_.personnes_id as personne1_3_0_,
+        projets0_.projets_id as projets_2_3_0_,
+        projet1_.id as id1_4_1_,
+        projet1_.cle_etrangere_categorie as cle_etra4_4_1_,
+        projet1_.description as descript2_4_1_,
+        projet1_.titre as titre3_4_1_,
+        categorie2_.id as id1_1_2_,
+        categorie2_.description as descript2_1_2_,
+        categorie2_.labelle as labelle3_1_2_ 
+    from
+        Personne_Projet projets0_ 
+    inner join
+        Projet projet1_ 
+            on projets0_.projets_id=projet1_.id 
+    left outer join
+        Categorie categorie2_ 
+            on projet1_.cle_etrangere_categorie=categorie2_.id 
+    where
+        projets0_.personnes_id=?
+2025-03-13 01:58:23,295 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,300 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,301 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [10]
+2025-03-13 01:58:23,304 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,305 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [11]
+2025-03-13 01:58:23,306 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,307 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [12]
+2025-03-13 01:58:23,309 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne_Projet
+        (personnes_id, projets_id) 
+    values
+        (?, ?)
+2025-03-13 01:58:23,310 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,310 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [BIGINT] - [10]
+2025-03-13 01:58:23,311 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne_Projet
+        (personnes_id, projets_id) 
+    values
+        (?, ?)
+2025-03-13 01:58:23,312 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,312 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [BIGINT] - [11]
+2025-03-13 01:58:23,314 DEBUG o.h.SQL [main] 
+    insert 
+    into
+        Personne_Projet
+        (personnes_id, projets_id) 
+    values
+        (?, ?)
+2025-03-13 01:58:23,315 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,315 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [BIGINT] - [12]
+2025-03-13 01:58:23,324 DEBUG o.h.SQL [main] 
+    select
+        adresse0_.id as id1_0_0_,
+        adresse0_.codePostale as codepost2_0_0_,
+        adresse0_.rue as rue3_0_0_,
+        adresse0_.ville as ville4_0_0_,
+        personne1_.id as id1_2_1_,
+        personne1_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne1_.nom as nom2_2_1_,
+        personne1_.prenom as prenom3_2_1_ 
+    from
+        Adresse adresse0_ 
+    left outer join
+        Personne personne1_ 
+            on adresse0_.id=personne1_.cle_etrangere_adresse 
+    where
+        adresse0_.id=?
+2025-03-13 01:58:23,326 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,333 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_0_,
+        categorie0_.description as descript2_1_0_,
+        categorie0_.labelle as labelle3_1_0_ 
+    from
+        Categorie categorie0_ 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,335 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,338 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_0_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_0_,
+        personne0_.nom as nom2_2_0_,
+        personne0_.prenom as prenom3_2_0_,
+        adresse1_.id as id1_0_1_,
+        adresse1_.codePostale as codepost2_0_1_,
+        adresse1_.rue as rue3_0_1_,
+        adresse1_.ville as ville4_0_1_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,339 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,344 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,349 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [12]
+2025-03-13 01:58:23,356 DEBUG o.h.SQL [main] 
+    select
+        adresse0_.id as id1_0_0_,
+        adresse0_.codePostale as codepost2_0_0_,
+        adresse0_.rue as rue3_0_0_,
+        adresse0_.ville as ville4_0_0_,
+        personne1_.id as id1_2_1_,
+        personne1_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne1_.nom as nom2_2_1_,
+        personne1_.prenom as prenom3_2_1_ 
+    from
+        Adresse adresse0_ 
+    left outer join
+        Personne personne1_ 
+            on adresse0_.id=personne1_.cle_etrangere_adresse 
+    where
+        adresse0_.id=?
+2025-03-13 01:58:23,357 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,364 DEBUG o.h.SQL [main] 
+    update
+        Personne 
+    set
+        cle_etrangere_adresse=?,
+        nom=?,
+        prenom=? 
+    where
+        id=?
+2025-03-13 01:58:23,365 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [null]
+2025-03-13 01:58:23,366 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [2] as [VARCHAR] - [amine]
+2025-03-13 01:58:23,366 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [3] as [VARCHAR] - [ezzahi]
+2025-03-13 01:58:23,367 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [4] as [BIGINT] - [5]
+2025-03-13 01:58:23,368 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Adresse 
+    where
+        id=?
+2025-03-13 01:58:23,369 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [1]
+2025-03-13 01:58:23,383 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_0_,
+        categorie0_.description as descript2_1_0_,
+        categorie0_.labelle as labelle3_1_0_ 
+    from
+        Categorie categorie0_ 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,384 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,385 DEBUG o.h.SQL [main] 
+    select
+        projets0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projets0_.id as id1_4_0_,
+        projets0_.id as id1_4_1_,
+        projets0_.cle_etrangere_categorie as cle_etra4_4_1_,
+        projets0_.description as descript2_4_1_,
+        projets0_.titre as titre3_4_1_ 
+    from
+        Projet projets0_ 
+    where
+        projets0_.cle_etrangere_categorie=?
+2025-03-13 01:58:23,386 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,550 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_,
+        personne0_.nom as nom2_2_,
+        personne0_.prenom as prenom3_2_ 
+    from
+        Personne personne0_
+2025-03-13 01:58:23,552 DEBUG o.h.SQL [main] 
+    select
+        adresse0_.id as id1_0_0_,
+        adresse0_.codePostale as codepost2_0_0_,
+        adresse0_.rue as rue3_0_0_,
+        adresse0_.ville as ville4_0_0_,
+        personne1_.id as id1_2_1_,
+        personne1_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne1_.nom as nom2_2_1_,
+        personne1_.prenom as prenom3_2_1_ 
+    from
+        Adresse adresse0_ 
+    left outer join
+        Personne personne1_ 
+            on adresse0_.id=personne1_.cle_etrangere_adresse 
+    where
+        adresse0_.id=?
+2025-03-13 01:58:23,552 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,554 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_1_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_1_,
+        personne0_.nom as nom2_2_1_,
+        personne0_.prenom as prenom3_2_1_,
+        adresse1_.id as id1_0_0_,
+        adresse1_.codePostale as codepost2_0_0_,
+        adresse1_.rue as rue3_0_0_,
+        adresse1_.ville as ville4_0_0_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.cle_etrangere_adresse=?
+2025-03-13 01:58:23,554 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,557 DEBUG o.h.SQL [main] 
+    select
+        projets0_.personnes_id as personne1_3_0_,
+        projets0_.projets_id as projets_2_3_0_,
+        projet1_.id as id1_4_1_,
+        projet1_.cle_etrangere_categorie as cle_etra4_4_1_,
+        projet1_.description as descript2_4_1_,
+        projet1_.titre as titre3_4_1_,
+        categorie2_.id as id1_1_2_,
+        categorie2_.description as descript2_1_2_,
+        categorie2_.labelle as labelle3_1_2_ 
+    from
+        Personne_Projet projets0_ 
+    inner join
+        Projet projet1_ 
+            on projets0_.projets_id=projet1_.id 
+    left outer join
+        Categorie categorie2_ 
+            on projet1_.cle_etrangere_categorie=categorie2_.id 
+    where
+        projets0_.personnes_id=?
+2025-03-13 01:58:23,557 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,560 DEBUG o.h.SQL [main] 
+    select
+        projets0_.personnes_id as personne1_3_0_,
+        projets0_.projets_id as projets_2_3_0_,
+        projet1_.id as id1_4_1_,
+        projet1_.cle_etrangere_categorie as cle_etra4_4_1_,
+        projet1_.description as descript2_4_1_,
+        projet1_.titre as titre3_4_1_,
+        categorie2_.id as id1_1_2_,
+        categorie2_.description as descript2_1_2_,
+        categorie2_.labelle as labelle3_1_2_ 
+    from
+        Personne_Projet projets0_ 
+    inner join
+        Projet projet1_ 
+            on projets0_.projets_id=projet1_.id 
+    left outer join
+        Categorie categorie2_ 
+            on projet1_.cle_etrangere_categorie=categorie2_.id 
+    where
+        projets0_.personnes_id=?
+2025-03-13 01:58:23,560 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,566 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Personne_Projet 
+    where
+        personnes_id=?
+2025-03-13 01:58:23,567 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [5]
+2025-03-13 01:58:23,568 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Projet 
+    where
+        id=?
+2025-03-13 01:58:23,569 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [7]
+2025-03-13 01:58:23,570 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Projet 
+    where
+        id=?
+2025-03-13 01:58:23,570 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [8]
+2025-03-13 01:58:23,571 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Projet 
+    where
+        id=?
+2025-03-13 01:58:23,572 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [9]
+2025-03-13 01:58:23,572 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Categorie 
+    where
+        id=?
+2025-03-13 01:58:23,573 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [3]
+2025-03-13 01:58:23,583 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_0_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_0_,
+        personne0_.nom as nom2_2_0_,
+        personne0_.prenom as prenom3_2_0_,
+        adresse1_.id as id1_0_1_,
+        adresse1_.codePostale as codepost2_0_1_,
+        adresse1_.rue as rue3_0_1_,
+        adresse1_.ville as ville4_0_1_ 
+    from
+        Personne personne0_ 
+    left outer join
+        Adresse adresse1_ 
+            on personne0_.cle_etrangere_adresse=adresse1_.id 
+    where
+        personne0_.id=?
+2025-03-13 01:58:23,583 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,585 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Personne_Projet 
+    where
+        personnes_id=?
+2025-03-13 01:58:23,585 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,586 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Personne 
+    where
+        id=?
+2025-03-13 01:58:23,586 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [6]
+2025-03-13 01:58:23,587 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Adresse 
+    where
+        id=?
+2025-03-13 01:58:23,587 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [2]
+2025-03-13 01:58:23,595 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_0_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_0_,
+        projet0_.description as descript2_4_0_,
+        projet0_.titre as titre3_4_0_,
+        categorie1_.id as id1_1_1_,
+        categorie1_.description as descript2_1_1_,
+        categorie1_.labelle as labelle3_1_1_ 
+    from
+        Projet projet0_ 
+    left outer join
+        Categorie categorie1_ 
+            on projet0_.cle_etrangere_categorie=categorie1_.id 
+    where
+        projet0_.id=?
+2025-03-13 01:58:23,596 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [12]
+2025-03-13 01:58:23,599 DEBUG o.h.SQL [main] 
+    delete 
+    from
+        Projet 
+    where
+        id=?
+2025-03-13 01:58:23,599 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [12]
+2025-03-13 01:58:23,609 DEBUG o.h.SQL [main] 
+    select
+        adresse0_.id as id1_0_,
+        adresse0_.codePostale as codepost2_0_,
+        adresse0_.rue as rue3_0_,
+        adresse0_.ville as ville4_0_ 
+    from
+        Adresse adresse0_
+2025-03-13 01:58:23,612 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_,
+        categorie0_.description as descript2_1_,
+        categorie0_.labelle as labelle3_1_ 
+    from
+        Categorie categorie0_
+2025-03-13 01:58:23,616 DEBUG o.h.SQL [main] 
+    select
+        personne0_.id as id1_2_,
+        personne0_.cle_etrangere_adresse as cle_etra4_2_,
+        personne0_.nom as nom2_2_,
+        personne0_.prenom as prenom3_2_ 
+    from
+        Personne personne0_
+2025-03-13 01:58:23,620 DEBUG o.h.SQL [main] 
+    select
+        projet0_.id as id1_4_,
+        projet0_.cle_etrangere_categorie as cle_etra4_4_,
+        projet0_.description as descript2_4_,
+        projet0_.titre as titre3_4_ 
+    from
+        Projet projet0_
+2025-03-13 01:58:23,622 DEBUG o.h.SQL [main] 
+    select
+        categorie0_.id as id1_1_0_,
+        categorie0_.description as descript2_1_0_,
+        categorie0_.labelle as labelle3_1_0_ 
+    from
+        Categorie categorie0_ 
+    where
+        categorie0_.id=?
+2025-03-13 01:58:23,622 TRACE o.h.t.d.s.BasicBinder [main] binding parameter [1] as [BIGINT] - [4]

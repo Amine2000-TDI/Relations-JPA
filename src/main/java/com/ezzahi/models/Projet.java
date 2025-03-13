@@ -19,11 +19,13 @@ public class Projet {
     private Long id;
     private String description;
     private String titre;
-    @ManyToMany(mappedBy = "projets" , fetch = FetchType.LAZY)
-    private List<Personne> personnes;
-    @ManyToOne
-    @JoinColumn(name = "cle_etrangere_categorie")
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "cle_etrangere_categorie" )
     private Categorie categorie;
+
+    @ManyToMany(mappedBy = "projets", fetch = FetchType.LAZY )
+    private List<Personne> personnes;
 
     @Override
     public String toString(){

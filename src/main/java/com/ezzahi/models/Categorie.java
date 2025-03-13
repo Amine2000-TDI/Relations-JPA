@@ -20,7 +20,7 @@ public class Categorie {
     private String labelle;
     private String description;
 
-    @OneToMany(mappedBy = "categorie" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categorie" , fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     private List<Projet> projets;
 
     @Override
